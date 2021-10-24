@@ -1,14 +1,25 @@
-import IStakedLuna from "../types/Terra";
 import axios from "axios";
-import { url } from "inspector";
 
-const getAllStakedLuna = () => {
-    return axios.get<IStakedLuna[]>
-        ("https://api.flipsidecrypto.com/api/v2/queries/c150c128-8b00-4aa5-9a25-addd71a864fc/data/latest")
+const getStakedLuna = (address: string) => {
+    return axios.get<number>
+    (`http://localhost:5000/address/${address}/stakedluna`)
+}
+
+
+const getGovernanceVotes = (address: string) => {
+    return axios.get<number>
+    (`http://localhost:5000/address/${address}/governancevotes`)
+}
+
+const getUstDepositsToAnchor = (address: string) => {
+    return axios.get<number>
+    (`http://localhost:5000/address/${address}/ustdeposits`)
 }
 
 const TerraService = {
-    getAllStakedLuna
+    getStakedLuna,
+    getGovernanceVotes,
+    getUstDepositsToAnchor
 }
 
 export default TerraService;
