@@ -1,0 +1,35 @@
+@import "./variables.scss";
+
+html, body{
+    background-color: $background;
+    margin: 0;
+    padding: 0;
+    color: $text-main;
+    font-family: 'Roboto Mono';
+}
+
+ol, ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+$link-color: $link;
+
+a{
+    text-decoration: none;
+    color: $link-color;
+    font-weight: 600;
+    transition-duration: $transition-time;
+    transition-property: color;
+}
+
+a:hover,
+a:focus,
+a:active {
+    color: lighten($link-color, 10%);
+}
+
+h2{
+    color: $highlight-text
+}

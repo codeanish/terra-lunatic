@@ -1,0 +1,23 @@
+@import "./styles/global.scss";
+
+.container{    
+    display: flex;
+    flex-direction: column;        
+    max-width: 600px;   
+    margin-left: auto;
+    margin-right: auto;    
+    margin-bottom: 5em;
+}
+
+.textInput{
+    font-family: $normal-font;
+    color: $nord3;
+    background-color: $nord6;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid $nord2;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    box-shadow: 3px 3px 6px -3px rgba(0,0,0,0.6);
+}

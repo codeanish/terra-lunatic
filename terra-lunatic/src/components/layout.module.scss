@@ -1,0 +1,19 @@
+@import "../styles/variables.scss";
+
+.container{    
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+}
+
+.content-wrapper{
+    padding: 2em;
+    flex: 1;
+    display: flex;    
+}
+
+@supports (-webkit-touch-callout: none){
+    .container{
+        height: 100%;
+    }
+}

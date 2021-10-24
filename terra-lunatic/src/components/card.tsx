@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TerraService from '../services/TerraService';
 import { Button } from '@material-ui/core';
+import styles from './card.module.scss'
 
 export interface Props{
     address: string;
@@ -85,9 +86,7 @@ const Card = (props: Props) => {
     }
 
     return(
-        <div>
-            <h1>Terra Lunatic</h1>
-            <h2>Address: {props.address}</h2>
+        <div className={styles.container}>
             <Button variant="contained" onClick={runQueries}>Click me</Button>
             <p>Staked Luna: {stakedLuna}</p>
             <p>Staked Luna Score: {calculateLunaBasedScore(stakedLuna)} </p>

@@ -1,0 +1,31 @@
+$nord1: #2E3440;
+$nord2: #3B4252;
+$nord3: #434C5E;
+$nord4: #4C566A;
+
+$nord5: #D8DEE9;
+$nord6: #E5E9F0;
+$nord7: #ECEFF4;
+
+$nord8: #8FBCBB;
+$nord9: #88C0D0;
+$nord10: #81A1C1;
+$nord11: #5E81AC;
+
+$nord12: #BF616A;
+$nord13: #D08770;
+$nord14: #EBCB8B;
+$nord15: #A3BE8C;
+$nord16: #B48EAD;
+
+$normal-font: 'Work Sans';
+
+$background: $nord1;
+$text-main: $nord7;
+$text-low-contrast: $nord5;
+$text-super-low-contrast: $nord11;
+$link: $nord15;
+$link-hover: lighten($link, 20%);
+$highlight-text: $nord15;
+$transition-time: 0.3s;
+$card-color: $nord2;
