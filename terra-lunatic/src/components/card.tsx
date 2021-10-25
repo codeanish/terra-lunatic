@@ -1,13 +1,26 @@
-import React, {useState} from 'react';
+// import { Button } from '@mui/material';
+import React, {useState, useEffect} from 'react';
 import TerraService from '../services/TerraService';
-import { Button } from '@material-ui/core';
+
 import styles from './card.module.scss'
+import LinearValueIndicator from './linear-value-indicator';
 
 export interface Props{
     address: string;
 }
 
 const Card = (props: Props) => {
+
+    useEffect(() => {
+        if(props.address !== ""){
+            runQueries()
+        }
+        else{
+            setStakedLuna(0);
+            setDepositedUST(0);
+            setGovernanceVotes(0);
+        }
+    })
 
     const initialStakedLunaState = 0
 
@@ -87,13 +100,14 @@ const Card = (props: Props) => {
 
     return(
         <div className={styles.container}>
-            <Button variant="contained" onClick={runQueries}>Click me</Button>
+            {/* <Button variant="contained" onClick={runQueries}>Click me</Button> */}
             <p>Staked Luna: {stakedLuna}</p>
             <p>Staked Luna Score: {calculateLunaBasedScore(stakedLuna)} </p>
             <p>Governance Votes: {governanceVotes}</p>
             <p>Deposited UST: {depositedUST}</p>
             <p>Deposited UST Score: {calculateLunaBasedScore(depositedUST / 40)} </p>
             <p>Total Score: {calculateLunaBasedScore(stakedLuna) + calculateLunaBasedScore(depositedUST / 40) + governanceVotes}</p>
+            <LinearValueIndicator value={50}/>
         </div>
     )
 }
