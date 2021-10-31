@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import TerraService from '../services/TerraService';
+import { ChallengeScore } from '../shared/types';
 
 import styles from './card.module.scss'
+import Challenges from './challenges';
 import LinearValueIndicator from './linear-value-indicator';
 
 export interface Props{
@@ -131,6 +133,12 @@ const Card = (props: Props) => {
     }
 
     const [showResults, setShowResults] = useState<boolean>(false)
+    const challengeScores = (): ChallengeScore[] =>{
+        let scores = new Array<ChallengeScore>();
+        scores.push({name:"Staked Luna", score:50, description:"Luna staked", "complete": false})
+        scores.push({name:"Governance Votes", score:30, description:"Voted in at least one governance proposal", "complete": true})
+        return scores
+    } 
 
     return(
         <div className={styles.container}>
@@ -140,6 +148,7 @@ const Card = (props: Props) => {
             <p>Governance Votes: {governanceVotes}</p>
             <p>Deposited UST in Anchor: {depositedUST}</p>
             <p>Deposited uLP in Pylon Pool: {depositeduLP}</p>
+            <Challenges scores={challengeScores()}/>
         </div>
     )
 }
