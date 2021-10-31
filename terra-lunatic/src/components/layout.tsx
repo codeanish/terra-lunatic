@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import "../styles/global.scss"
 import styles from './layout.module.scss'
 import Nav from './nav';
 
-const Layout : React.FC = ({children}) => {
+export interface Props{
+    children: ReactNode,
+    setAddress: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Layout = (props: Props) => {
+
     return(
         <div className={styles.container}>
-            <Nav/>
+            <Nav setAddress={props.setAddress}/>
             <div className={styles.contentWrapper}>
-                {children}
+                {props.children}
             </div>
         </div>
     )
