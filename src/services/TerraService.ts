@@ -3,12 +3,12 @@ import { ChallengeScore } from "../shared/types";
 
 const getChallengeScores = (address: string) => {
     return axios.get<ChallengeScore[]>
-    (`http://localhost:5000/address/${address}/scores`)
+    (process.env.REACT_APP_API_URL + `/address/${address}/scores`)
 }
 
 const getChallengeCateogies = () => {
     return axios.get<ChallengeScore[]>
-    (`http://localhost:5000/scores`)
+    (process.env.REACT_APP_API_URL + `/scores`)
 }
 
 const TerraService = {
