@@ -1,30 +1,19 @@
 import axios from "axios";
+import { ChallengeScore } from "../shared/types";
 
-const getStakedLuna = (address: string) => {
-    return axios.get<number>
-    (`http://localhost:5000/address/${address}/stakedluna`)
+const getChallengeScores = (address: string) => {
+    return axios.get<ChallengeScore[]>
+    (`http://localhost:5000/address/${address}/scores`)
 }
 
-const getGovernanceVotes = (address: string) => {
-    return axios.get<number>
-    (`http://localhost:5000/address/${address}/governancevotes`)
-}
-
-const getUstDepositsToAnchor = (address: string) => {
-    return axios.get<number>
-    (`http://localhost:5000/address/${address}/ustdeposits`)
-}
-
-const getuLPDepositsToPylon = (address: string) => {
-    return axios.get<number>
-    (`http://localhost:5000/address/${address}/pylonmimeustdeposits`)
+const getChallengeCateogies = () => {
+    return axios.get<ChallengeScore[]>
+    (`http://localhost:5000/scores`)
 }
 
 const TerraService = {
-    getStakedLuna,
-    getGovernanceVotes,
-    getUstDepositsToAnchor,
-    getuLPDepositsToPylon
+    getChallengeScores,
+    getChallengeCateogies
 }
 
 export default TerraService;

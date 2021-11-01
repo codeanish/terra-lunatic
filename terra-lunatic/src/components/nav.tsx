@@ -10,7 +10,6 @@ export interface Props {
 const Nav = (props: Props) => {
 
     const [isConnected, setIsConnected] = useState(false);
-    const [walletAddress, setWalletAddress] = useState("");
     const [dialogAddress, setDialogAddress] = useState("")
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
@@ -18,7 +17,6 @@ const Nav = (props: Props) => {
   
     const handleClick = () => {
       if(isConnected){
-        setWalletAddress("");
         setButtonText("CONNECT");
         setIsConnected(false);
         props.setAddress("");
@@ -28,7 +26,6 @@ const Nav = (props: Props) => {
     }
   
     const updateWalletAddress = () => {
-      setWalletAddress(dialogAddress);
       setButtonText(dialogAddress.substr(0,3) + '...' + dialogAddress.slice(-3));
       setIsConnected(true);
       props.setAddress(dialogAddress)
@@ -70,7 +67,7 @@ const Nav = (props: Props) => {
             </div>
             <ul className={styles.navItems}>
                 <li className={styles.navItem}><NavLink to="/">Score</NavLink></li>
-                <li className={styles.navItem}><NavLink to="/asylum">Asylum</NavLink></li>
+                {/* <li className={styles.navItem}><NavLink to="/asylum">Asylum</NavLink></li> */}
                 <li className={styles.navItem}>
                     <Button style={{maxWidth: '120px', minWidth: '120px'}} size="large" variant="contained" onClick={handleClick}>{buttonText}</Button>
                 </li>
