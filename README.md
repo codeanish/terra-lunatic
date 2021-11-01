@@ -8,4 +8,4 @@ In the project directory, you can run:
 
 ## Dependencies
 
-This project requires a terra-lunatic-server to be up and running to respond to API requests. The API was built on top of the flipside api's to provide a more dynamically queryable api (improved user experience).
+This project requires a [terra-lunatic-server](https://github.com/codeanish/terra-lunatic-server) to be up and running to respond to API requests. The API was built on top of the flipside api's to provide a more dynamically queryable api (improved user experience).
