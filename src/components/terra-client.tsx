@@ -1,39 +1,40 @@
-import { Coin, LCDClient } from "@terra-money/terra.js";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import TerraService from "../services/TerraService";
 
 export interface Props{
     address: string
 }
 
 const TerraClient = (props: Props) => {
-    const terra = new LCDClient({
-        URL: 'https://lcd.terra.dev',
-        chainID: 'columbus-5'
-    });
 
-    const contractAddress = 'terra1sepfj7s0aeg5967uxnfk4thzlerrsktkpelm5s';
-    const myAddress = 'terra1pkwhhh5rt740sdvpq7rkc36s9zavr52p9ld826';
+    const [hasAnchorBorrowing, setAnchorBorrowing] = useState(false)
 
-    const offerCoin = new Coin('uusd', '1000000');
-    terra.staking.delegations(myAddress).then(delegations => {
-        for(let i = 0; i < delegations.length; i++){
-            console.log(delegations[0].balance.denom)
+    useEffect(() => {
+        if (props.address !== ""){
+            runQueries()
+        } else {
+            resetState()
         }
-    });
-    
-    terra.wasm.contractQuery(
-        contractAddress, 
-        {borrower_info: {
-            borrower: myAddress,
-          }}).then(a => {
-        console.log(a);
-    });
-    // terra.market.swapRate(offerCoin, 'ukrw').then(c => {
-    //     console.log(`${offerCoin.toString()} can be swapped for ${c.toString()}`);
-    //   });
+    }, [props.address, hasAnchorBorrowing])
+
+    const resetState = () => {
+        setAnchorBorrowing(false);
+    }
+
+    const runQueries = () => {
+        TerraService.getAnchorBorrowing(props.address).then(a => {
+            if(a.loan_amount >0){
+                console.log(a.loan_amount);
+                setAnchorBorrowing(true);
+            }else {
+                console.log(a.loan_amount);
+                setAnchorBorrowing(false);
+            }
+        });
+    }
 
     return (
-        <div></div>
+        <div>{hasAnchorBorrowing ? "Yes" : "No"}</div>
     )
 }
 
