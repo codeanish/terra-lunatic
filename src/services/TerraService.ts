@@ -1,3 +1,4 @@
+import { LCDClient, MsgVote } from "@terra-money/terra.js";
 import axios from "axios";
 import { ChallengeScore } from "../shared/types";
 
@@ -13,9 +14,29 @@ const getChallengeCateogies = () => {
     (url + `/scores`)
 }
 
+const terra = new LCDClient({
+    URL: 'https://lcd.terra.dev',
+    chainID: 'columbus-5'
+});
+
+const getStakedDelegations = (address: string) => {
+    return terra.staking.delegations(address)
+}
+
+const getTotalTransactions = (address: string) => {
+    return terra.tx.search({"message.sender": address, "limit": 1})
+}
+
+const getTransactions = (address: string, limit: number, page: number) => {
+    return terra.tx.search({"message.sender": address, "limit": limit, "page": page})
+}
+
 const TerraService = {
     getChallengeScores,
-    getChallengeCateogies
+    getChallengeCateogies,
+    getStakedDelegations,
+    getTotalTransactions,
+    getTransactions
 }
 
 export default TerraService;
