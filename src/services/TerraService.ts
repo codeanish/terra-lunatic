@@ -1,6 +1,6 @@
-import { LCDClient } from "@terra-money/terra.js";
+import { LCDClient, MsgVote } from "@terra-money/terra.js";
 import axios from "axios";
-import { BorrowerInfo, ChallengeScore } from "../shared/types";
+import { ChallengeScore } from "../shared/types";
 
 const url = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://localhost:5000'
 
@@ -19,20 +19,24 @@ const terra = new LCDClient({
     chainID: 'columbus-5'
 });
 
-const getAnchorBorrowing = (address: string) => {
-    const contractAddress = 'terra1sepfj7s0aeg5967uxnfk4thzlerrsktkpelm5s';
-    
-    return terra.wasm.contractQuery<BorrowerInfo>(
-        contractAddress, 
-        {borrower_info: {
-            borrower: address,
-          }})
+const getStakedDelegations = (address: string) => {
+    return terra.staking.delegations(address)
+}
+
+const getTotalTransactions = (address: string) => {
+    return terra.tx.search({"message.sender": address, "limit": 1})
+}
+
+const getTransactions = (address: string, limit: number, page: number) => {
+    return terra.tx.search({"message.sender": address, "limit": limit, "page": page})
 }
 
 const TerraService = {
     getChallengeScores,
     getChallengeCateogies,
-    getAnchorBorrowing
+    getStakedDelegations,
+    getTotalTransactions,
+    getTransactions
 }
 
 export default TerraService;
