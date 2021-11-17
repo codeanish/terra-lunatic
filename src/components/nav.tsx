@@ -37,37 +37,26 @@ const Nav = (props: Props) => {
             <Modal 
             open={open}
             onClose={handleClose}>
-              <Box
-                sx = {{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: 400,
-                  bgcolor: 'background.paper',
-                  border: '2px solid #000',
-                  boxShadow: 24,
-                  p: 4,
-                }}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  View an Address
-                </Typography>
-                <TextField
-                  className={styles.textInput}
-                  placeholder="ADDRESS" 
-                  value={dialogAddress} 
-                  onChange={(e) =>setDialogAddress(e.target.value)}/>
-                <Button onClick={updateWalletAddress}>
-                  View
-                </Button>
+              <Box className={styles.modalBox}>
+                <div className={styles.modalContainer}>
+                  <div className={styles.heading}>
+                    View an Address
+                  </div>
+                  <input
+                    className={styles.textInput}
+                    placeholder="terrapsj..." 
+                    value={dialogAddress} 
+                    onChange={(e) =>setDialogAddress(e.target.value)}/>
+                  <Button className={styles.viewButton} onClick={updateWalletAddress}>
+                    View
+                  </Button>
+                </div>
               </Box>
           </Modal>
             <div className={styles.logo}>
                 <NavLink to="/">Terra Lunatic</NavLink>
             </div>
             <ul className={styles.navItems}>
-                <li className={styles.navItem}><NavLink to="/">Score</NavLink></li>
-                {/* <li className={styles.navItem}><NavLink to="/asylum">Asylum</NavLink></li> */}
                 <li className={styles.navItem}>
                     <Button style={{maxWidth: '120px', minWidth: '120px'}} size="large" variant="contained" onClick={handleClick}>{buttonText}</Button>
                 </li>
