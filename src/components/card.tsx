@@ -13,11 +13,11 @@ export interface Props{
 
 const Card = (props: Props) => {
 
-    const initialStakedDelegation = {name: "Staked Luna", description: "Staked Luna", score: 50, complete: false}
-    const initialAnchorBorrowing = {name: "Anchor Borrowing", description: "Borrowing UST from Anchor", score: 30, complete: false}
-    const initialAnchorDeposits = {name: "Anchor Deposits", description: "Deposit UST in Anchor", score: 30, complete: false}
-    const initialPylonMineUSTDepoist = {name: "Pylon MINE UST", description: "Add liquidity to MINE-UST in Pylon", score: 30, complete: false}
-    const initialGovernanceVotes = {name: "Governance Votes", description: "Voted on a Governance Proposal", score: 20, complete: false}
+    const initialStakedDelegation = {name: "Staked Luna", description: "Staked Luna", score: 50, complete: false, url: "https://station.terra.money/staking", image: "terra"}
+    const initialAnchorBorrowing = {name: "Anchor Borrowing", description: "Borrowing UST from Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/borrow", image: "anchor"}
+    const initialAnchorDeposits = {name: "Anchor Deposits", description: "Deposit UST in Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/earn", image: "anchor"}
+    const initialPylonMineUSTDepoist = {name: "Pylon MINE UST", description: "Add liquidity to MINE-UST in Pylon", score: 30, complete: false, url: "https://app.pylon.money/liquidity/pool/provide", image: "pylon"}
+    const initialGovernanceVotes = {name: "Governance Votes", description: "Voted on a Governance Proposal", score: 20, complete: false, url: "https://station.terra.money/governance?status=2", image: "terra"}
     const [stakedLuna, setStakedLuna] = useState<ChallengeScore>(initialStakedDelegation);
     const [anchorBorrowing, setAnchorBorrowing] = useState<ChallengeScore>(initialAnchorBorrowing);
     const [anchorDeposit, setAnchorDeposit] = useState<ChallengeScore>(initialAnchorDeposits);
@@ -50,7 +50,7 @@ const Card = (props: Props) => {
         TerraService.getStakedDelegations(props.address)
         .then((response) => {
             if(response.length > 0){
-                setStakedLuna({score: 50, name: "Staked Luna", description: "Staked Luna", complete: true});
+                setStakedLuna({...initialStakedDelegation, complete: true});
             }
         })
     }
@@ -71,18 +71,18 @@ const Card = (props: Props) => {
                     for(let x = 0; x < b.count; x++){
                         for (let y = 0; y < b.txs[x].tx.msg.length; y++){
                             if(b.txs[x].tx.msg[y] instanceof MsgVote){
-                                setGovernanceProposal({name: "Governance Votes", description: "Voted on a Governance Proposal", score: 20, complete: true})
+                                setGovernanceProposal({...initialGovernanceVotes, complete: true})
                             }
                             if(b.txs[x].tx.msg[y] instanceof MsgExecuteContract){
                                 let contract = b.txs[x].tx.msg[y] as MsgExecuteContract;
                                 if(contract.contract === anchorContract &&  'deposit_stable' in contract.execute_msg){
-                                    setAnchorDeposit({name: "Anchor Deposits", description: "Deposit UST in Anchor", score: 30, complete: true});
+                                    setAnchorDeposit({...initialAnchorDeposits, complete: true});
                                 }
                                 if(contract.contract === anchorContract &&  'borrow_stable' in contract.execute_msg){
-                                    setAnchorBorrowing({name: "Anchor Borrowing", description: "Borrowing UST from Anchor", score: 30, complete: true});
+                                    setAnchorBorrowing({...initialAnchorBorrowing, complete: true});
                                 }
                                 if(contract.contract === pylonMineUSTContract && 'provide_liquidity' in contract.execute_msg){
-                                    setPylonMineUst({name: "Pylon MINE UST", description: "Add liquidity to MINE-UST in Pylon", score: 30, complete: true});
+                                    setPylonMineUst({...initialPylonMineUSTDepoist, complete: true});
                                 }
                             }
                         }

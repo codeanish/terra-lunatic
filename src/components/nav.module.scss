@@ -1,3 +1,5 @@
+@import "../styles/variables.scss";
+
 .nav{
     display: flex;
     justify-content: space-between;
@@ -16,4 +18,41 @@
 .navItem{
     font-size: 2em;
     padding-right: 1em;
+}
+
+.modalBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: $nord5;
+    padding: 2em;
+}
+
+.modalContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.heading{
+    font-size: 24px;
+    text-align: center;
+    color: $nord1;
+    padding-bottom: 0.5em;
+}
+
+.textInput{
+    color: $nord3;
+    background-color: $nord6;
+    padding: 16px;
+    border: 1px solid $nord2;
+    border-radius: 4px;
+    box-shadow: 3px 3px 6px -3px rgba(0,0,0,0.6);
+}
+
+.viewButton{
+    color: $nord1;
+    font-size: 18px;
+    margin-top: 12px;
 }
