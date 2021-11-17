@@ -58,7 +58,7 @@ const Nav = (props: Props) => {
             </div>
             <ul className={styles.navItems}>
                 <li className={styles.navItem}>
-                    <Button style={{maxWidth: '120px', minWidth: '120px'}} size="large" variant="contained" onClick={handleClick}>{buttonText}</Button>
+                    <Button className={styles.walletButton} size="large" variant="contained" onClick={handleClick}>{buttonText}</Button>
                 </li>
             </ul>
             

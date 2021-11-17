@@ -1,3 +1,8 @@
+@import "../styles/variables.scss";
+
 .item{
     padding: 0.5em 0;
+    margin: 1em 0;
+    background-color: $nord2;
+    border-radius: 4px;
 }
