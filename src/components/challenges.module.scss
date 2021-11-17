@@ -5,4 +5,12 @@
     margin: 1em 0;
     background-color: $nord2;
     border-radius: 4px;
+    transition-duration: $transition-time;
+    transition-property: background-color;
+}
+
+.item:hover,
+.item:focus,
+.item:active{
+    background-color: $nord3;
 }
