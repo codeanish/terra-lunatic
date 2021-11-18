@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 // import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('G-MLV8NS7FNC')
 
 ReactDOM.render(
   <React.StrictMode>

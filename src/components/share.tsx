@@ -12,7 +12,7 @@ const Share = (props: Props) => {
     return (
         <div className={styles.container}>
             <div className={styles.text}>Let everyone know how much of a lunatic you are</div>
-            <TwitterShareButton title={"How much of a lunatic am i? I'm " + props.myScore + "/" + props.totalAvailableScore + " on the lunacy scale. " + props.description + ". How much of a lunatic are you?"} url={"https://www.terra.money/"} hashtags={["lunatic", "terra", "luna"]}><TwitterIcon size={64} round /></TwitterShareButton>
+            <TwitterShareButton title={"How much of a lunatic am i? I'm " + props.myScore + "/" + props.totalAvailableScore + " on the lunacy scale. " + props.description + ". How much of a lunatic are you?"} url={"https://terra-lunatic.com/"} hashtags={["lunatic", "terra", "luna"]}><TwitterIcon size={64} round /></TwitterShareButton>
         </div>
     )
 }
