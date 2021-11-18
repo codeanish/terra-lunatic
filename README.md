@@ -1,5 +1,7 @@
 # terra-lunatic
 
+Sample deployment https://main.d2adwe4wbtllyo.amplifyapp.com/
+
 ## Available Scripts
 
 In the project directory, you can run:
