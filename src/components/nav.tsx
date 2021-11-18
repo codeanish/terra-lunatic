@@ -8,7 +8,8 @@ export interface Props {
 }
 
 const Nav = (props: Props) => {
-
+    
+    
     const [isConnected, setIsConnected] = useState(false);
     const [dialogAddress, setDialogAddress] = useState("")
     const [open, setOpen] = useState(false);
