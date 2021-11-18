@@ -1,28 +1,32 @@
-import { MsgExecuteContract, MsgVote } from '@terra-money/terra.js';
+import { MsgExecuteContract, MsgVote, TreasuryAPI } from '@terra-money/terra.js';
 import React, {useState, useEffect} from 'react';
 import TerraService from '../services/TerraService';
-import { ChallengeScore } from '../shared/types';
+import { ChallengeScore, ExecuteSend } from '../shared/types';
 import styles from './card.module.scss'
 import Challenges from './challenges';
 import LinearValueIndicator from './linear-value-indicator';
 import Share from './share';
+import terraIcon from '../assets/icons/terra.svg'
+import pylonIcon from '../assets/icons/pylon.svg'
+import anchorIcon from '../assets/icons/anchor.svg'
 
 export interface Props{
     address: string;
 }
 
 const Card = (props: Props) => {
-
-    const initialStakedDelegation = {name: "Staked Luna", description: "Staked Luna", score: 50, complete: false, url: "https://station.terra.money/staking", image: "terra"}
-    const initialAnchorBorrowing = {name: "Anchor Borrowing", description: "Borrowing UST from Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/borrow", image: "anchor"}
-    const initialAnchorDeposits = {name: "Anchor Deposits", description: "Deposit UST in Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/earn", image: "anchor"}
-    const initialPylonMineUSTDepoist = {name: "Pylon MINE UST", description: "Add liquidity to MINE-UST in Pylon", score: 30, complete: false, url: "https://app.pylon.money/liquidity/pool/provide", image: "pylon"}
-    const initialGovernanceVotes = {name: "Governance Votes", description: "Voted on a Governance Proposal", score: 20, complete: false, url: "https://station.terra.money/governance?status=2", image: "terra"}
+    const initialStakedDelegation = {name: "Staked Luna", description: "Staked Luna", score: 50, complete: false, url: "https://station.terra.money/staking", image: terraIcon}
+    const initialAnchorBorrowing = {name: "Anchor Borrowing", description: "Borrowing UST from Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/borrow", image: anchorIcon}
+    const initialAnchorDeposits = {name: "Anchor Deposits", description: "Deposit UST in Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/earn", image: anchorIcon}
+    const initialAncStaked = {name: "ANC Staked", description: "Staked ANC in Anchor", score: 30, complete: false, url: "https://app.anchorprotocol.com/anc-governance/stake", image: anchorIcon}
+    const initialPylonMineUSTDepoist = {name: "Pylon MINE UST", description: "Add liquidity to MINE-UST in Pylon", score: 30, complete: false, url: "https://app.pylon.money/liquidity/pool/provide", image: pylonIcon}
+    const initialGovernanceVotes = {name: "Governance Votes", description: "Voted on a Governance Proposal", score: 20, complete: false, url: "https://station.terra.money/governance?status=2", image: terraIcon}
     const [stakedLuna, setStakedLuna] = useState<ChallengeScore>(initialStakedDelegation);
     const [anchorBorrowing, setAnchorBorrowing] = useState<ChallengeScore>(initialAnchorBorrowing);
     const [anchorDeposit, setAnchorDeposit] = useState<ChallengeScore>(initialAnchorDeposits);
     const [pylonMineUst, setPylonMineUst] = useState<ChallengeScore>(initialPylonMineUSTDepoist);
     const [governanceProposal, setGovernanceProposal] = useState<ChallengeScore>(initialGovernanceVotes);
+    const [ancStaked, setAncStaked] = useState<ChallengeScore>(initialAncStaked);
 
     useEffect(() => {
         if(props.address !== ""){
@@ -40,10 +44,11 @@ const Card = (props: Props) => {
         setAnchorDeposit(initialAnchorDeposits)
         setGovernanceProposal(initialGovernanceVotes)
         setPylonMineUst(initialPylonMineUSTDepoist)
+        setAncStaked(initialAncStaked);
     }
 
     const allCategories = () => {
-        return [stakedLuna, anchorBorrowing, anchorDeposit, pylonMineUst, governanceProposal]
+        return [stakedLuna, anchorBorrowing, anchorDeposit, ancStaked, pylonMineUst, governanceProposal]
     }
 
     const fetchStakedLuna = () => {
@@ -58,6 +63,8 @@ const Card = (props: Props) => {
 
     const fetchTransactions = () => {
         const anchorContract = 'terra1sepfj7s0aeg5967uxnfk4thzlerrsktkpelm5s'
+        const ancTokenContract = 'terra14z56l0fp2lsf86zy3hty2z47ezkhnthtr9yq76'
+        const anchorGovernanceContract = 'terra1f32xyep306hhcxxxf7mlyh0ucggc00rm2s9da5'
         const pylonMineUSTContract = 'terra178jydtjvj4gw8earkgnqc80c3hrmqj4kw2welz'
         TerraService.getTotalTransactions(props.address).then(a => {
             if(a.total_count === 0){
@@ -80,6 +87,12 @@ const Card = (props: Props) => {
                                 }
                                 if(contract.contract === anchorContract &&  'borrow_stable' in contract.execute_msg){
                                     setAnchorBorrowing({...initialAnchorBorrowing, complete: true});
+                                }
+                                if(contract.contract === ancTokenContract && 'send' in contract.execute_msg){
+                                    let send = contract.execute_msg as ExecuteSend
+                                    if(send.send.contract === anchorGovernanceContract){
+                                        setAncStaked({...initialAncStaked, complete: true})
+                                    }
                                 }
                                 if(contract.contract === pylonMineUSTContract && 'provide_liquidity' in contract.execute_msg){
                                     setPylonMineUst({...initialPylonMineUSTDepoist, complete: true});

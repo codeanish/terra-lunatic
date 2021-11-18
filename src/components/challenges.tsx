@@ -4,6 +4,7 @@ import React from 'react';
 import { ChallengeScore } from '../shared/types';
 import styles from './challenges.module.scss';
 
+
 export interface Props{
     scores: ChallengeScore[]
 }
@@ -14,6 +15,7 @@ const Challenges = (props: Props) => {
             {props.scores.map(score => (
                 <a href={score.url} target="_blank">
                     <ListItem key={score.name} className={styles.item}>
+                        <img src={score.image} className={styles.icon}/>
                         <ListItemText primary={score.description}/>
                         {score.complete ? <Chip sx={{bgcolor: "#D8DEE9"}} label={score.score} avatar={<Avatar><Check/></Avatar>}/> : <Chip sx={{bgcolor: "#D8DEE9"}} label={score.score}/>}
                     </ListItem>

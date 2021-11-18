@@ -9,6 +9,12 @@
     transition-property: background-color;
 }
 
+.icon{
+    width: 30px;
+    height: 30px;
+    padding: 0 5px;
+}
+
 .item:hover,
 .item:focus,
 .item:active{
