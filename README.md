@@ -1,6 +1,6 @@
 # terra-lunatic
 
-Sample deployment https://main.d2adwe4wbtllyo.amplifyapp.com/
+Live at https://terra-lunatic.com/
 
 ## Available Scripts
 
