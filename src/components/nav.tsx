@@ -56,7 +56,7 @@ const Nav = (props: Props) => {
               </Box>
           </Modal>
             <div className={styles.logo}>
-                <NavLink to="/"><img src={TerraLogo} alt="Terra"/></NavLink>
+                <NavLink to="/"><img src={TerraLogo} alt="Terra" width={100} height={25}/></NavLink>
             </div>
             <ul className={styles.navItems}>
                 <li className={styles.navItem}>
