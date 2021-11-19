@@ -1,7 +1,8 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from './nav.module.scss';
+import TerraLogo from '../assets/terra_logo.svg'
 
 export interface Props {
   setAddress: React.Dispatch<React.SetStateAction<string>>;
@@ -55,7 +56,7 @@ const Nav = (props: Props) => {
               </Box>
           </Modal>
             <div className={styles.logo}>
-                <NavLink to="/">Terra Lunatic</NavLink>
+                <NavLink to="/"><img src={TerraLogo} alt="Terra"/></NavLink>
             </div>
             <ul className={styles.navItems}>
                 <li className={styles.navItem}>

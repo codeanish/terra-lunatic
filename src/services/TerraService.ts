@@ -1,18 +1,4 @@
-import { LCDClient, MsgVote } from "@terra-money/terra.js";
-import axios from "axios";
-import { ChallengeScore } from "../shared/types";
-
-const url = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://localhost:5000'
-
-const getChallengeScores = (address: string) => {
-    return axios.get<ChallengeScore[]>
-    (url + `/address/${address}/scores`)
-}
-
-const getChallengeCateogies = () => {
-    return axios.get<ChallengeScore[]>
-    (url + `/scores`)
-}
+import { LCDClient} from "@terra-money/terra.js";
 
 const terra = new LCDClient({
     URL: 'https://lcd.terra.dev',
@@ -32,8 +18,6 @@ const getTransactions = (address: string, limit: number, page: number) => {
 }
 
 const TerraService = {
-    getChallengeScores,
-    getChallengeCateogies,
     getStakedDelegations,
     getTotalTransactions,
     getTransactions

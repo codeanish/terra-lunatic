@@ -13,9 +13,9 @@ const Challenges = (props: Props) => {
     return (
         <List>
             {props.scores.map(score => (
-                <a href={score.url} target="_blank">
+                <a href={score.url} target="_blank" rel="noreferrer">
                     <ListItem key={score.name} className={styles.item}>
-                        <img src={score.image} className={styles.icon}/>
+                        <img src={score.image} className={styles.icon} alt={score.name}/>
                         <ListItemText primary={score.description}/>
                         {score.complete ? <Chip sx={{bgcolor: "#D8DEE9"}} label={score.score} avatar={<Avatar><Check/></Avatar>}/> : <Chip sx={{bgcolor: "#D8DEE9"}} label={score.score}/>}
                     </ListItem>

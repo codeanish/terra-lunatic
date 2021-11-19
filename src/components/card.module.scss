@@ -17,3 +17,9 @@
     font-size: 1em;
     align-self: flex-end;
 }
+
+@media only screen and (max-width: 800px){
+    .container{
+        padding: 1em;
+    }
+}

@@ -1,10 +1,9 @@
-import { MsgExecuteContract, MsgVote, TreasuryAPI } from '@terra-money/terra.js';
+import { MsgExecuteContract, MsgVote } from '@terra-money/terra.js';
 import React, {useState, useEffect} from 'react';
 import TerraService from '../services/TerraService';
 import { ChallengeScore, ExecuteSend } from '../shared/types';
 import styles from './card.module.scss'
 import Challenges from './challenges';
-import LinearValueIndicator from './linear-value-indicator';
 import Share from './share';
 import terraIcon from '../assets/icons/terra.svg'
 import pylonIcon from '../assets/icons/pylon.svg'
@@ -70,7 +69,7 @@ const Card = (props: Props) => {
             if(a.total_count === 0){
                 return false;
             }
-            const limit = 2;
+            const limit = 30;
             let pages = Math.floor(a.total_count/limit) + 1
             
             for(let page = 1; page <= pages; page++){
@@ -134,12 +133,9 @@ const Card = (props: Props) => {
 
     return(
         <div className={styles.container}>
-            <h1>How much of a lunatic are you?</h1>
+            <h2>How much of a lunatic are you?</h2>
             <div className={styles.row}><div className={styles.bigNumber}>{myTotalScore()}</div><div className={styles.smallNumber}>/{totalAvailableScore()}</div></div>
-            <LinearValueIndicator value={(myTotalScore()/totalAvailableScore()) * 100}/>
-            <br/>
-            <h2>{lunaticDescription((myTotalScore()/totalAvailableScore()))}</h2>
-            <br/>
+            {myTotalScore() > 0 ? <p>{lunaticDescription((myTotalScore()/totalAvailableScore()))}</p> : null}
             <Challenges scores={allCategories()}/>
             {myTotalScore() > 0 ? <Share myScore={myTotalScore()} totalAvailableScore={totalAvailableScore()} description={lunaticDescription(myTotalScore()/totalAvailableScore())} /> : <br/>}
         </div>
