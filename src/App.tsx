@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from './router';
 import ReactGA from 'react-ga';
-ReactGA.initialize('G-MLV8NS7FNC')
+ReactGA.initialize('G-BTE68Y83H6')
 
 function App() {  
   return (
