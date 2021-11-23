@@ -69,7 +69,7 @@ const Card = (props: Props) => {
             if(a.total_count === 0){
                 return false;
             }
-            const limit = 2;
+            const limit = 30;
             let pages = Math.floor(a.total_count/limit) + 1
             
             for(let page = 1; page <= pages; page++){
