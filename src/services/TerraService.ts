@@ -1,7 +1,7 @@
 import { LCDClient} from "@terra-money/terra.js";
 
 const terra = new LCDClient({
-    URL: 'https://lcd.terra.dev',
+    URL: 'https://fcd.terra.dev',
     chainID: 'columbus-5'
 });
 
